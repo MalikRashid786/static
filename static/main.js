@@ -349,7 +349,7 @@ shButton.addEventListener('click', async () => {
                 await navigator.share({
                     files: [file],
                     title: 'Share Image',
-                    text: 'Check out this generated image!',
+                    // text: 'Check out this generated image!',
                 });
             } catch (error) {
                 alert('Sorry, your browser does not support the Share API.');
