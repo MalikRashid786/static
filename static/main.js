@@ -344,16 +344,11 @@ shButton.addEventListener('click', async () => {
         const file = new File([blob], 'image.png', { type: 'image/png' });
         // Check if the Web Share API is supported by the browser
         if (navigator.canShare){
-            try {
-                 // Share the image using the Web Share API
-                await navigator.share({
-                    files: [file],
-                    title: 'Share Image',
-                    // text: 'Check out this generated image!',
-                });
-            } catch (error) {
-                alert('Sorry, your browser does not support the Share API.');
-            }
+            await navigator.share({
+                files: [file],
+                title: 'Share Image',
+                // text: 'Check out this generated image!',
+            });
           } else {
              // Web Share API not supported, provide fallback
              alert('Sorry, your browser does not support the Share API or Your system does not support sharing these files.');
