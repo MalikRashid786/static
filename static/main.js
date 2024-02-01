@@ -341,9 +341,9 @@ shButton.addEventListener('click', async () => {
         // let files = [new File([blob], 'herbex_ignite.jpg', { type: blob.type })]
 
         const blob = await fetch(base64Image2).then(response => response.blob());
-        const file = new File([blob], 'image.jpg', { type: 'image/jpeg' });
+        const file = new File([blob], 'image.png', { type: 'image/png' });
         // Check if the Web Share API is supported by the browser
-        if (navigator.canShare && navigator.canShare({ files: [file] })){
+        if (navigator.canShare){
             try {
                  // Share the image using the Web Share API
                 await navigator.share({
