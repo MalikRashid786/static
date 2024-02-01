@@ -309,7 +309,7 @@ function createImageElement(src) {
 
 function downloadImage() {
     // Base64-encoded image string
-    var base64Image = img1; 
+    var base64Image = base64Image2; 
 
     // Create a link element
     var downloadLink = document.createElement("a");
