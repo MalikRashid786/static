@@ -336,10 +336,6 @@ function downloadImage() {
 const shButton = document.getElementById('shareButton');
 shButton.addEventListener('click', async () => {
     try {
-        // Create a new Blob object from the image URL
-        // const blob = await fetch(base64Image2).then(response => response.blob());
-        // let files = [new File([blob], 'herbex_ignite.jpg', { type: blob.type })]
-
         const blob = dataURLtoBlob(base64Image2);
         const file = new File([blob], 'image.png', { type: 'image/png' });
         // Check if the Web Share API is supported by the browser
@@ -347,7 +343,8 @@ shButton.addEventListener('click', async () => {
             await navigator.share({
                 files: [file],
                 title: 'Share Image',
-                // text: 'Check out this generated image!',
+                text: 'Check out this generated image!',
+                url: 'http://www.google.com',
             });
           } else {
              // Web Share API not supported, provide fallback
