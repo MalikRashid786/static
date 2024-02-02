@@ -337,14 +337,14 @@ const shButton = document.getElementById('shareButton');
 shButton.addEventListener('click', async () => {
     try {
         const blob = dataURLtoBlob(base64Image2);
-        const file = new File([base64Image2], 'image.png', { type: 'image/png' });
+        const file = new File([blob], 'image.png', { type: 'image/png' });
         // Check if the Web Share API is supported by the browser
         if (navigator.canShare){
             await navigator.share({
-                files: [file],
                 title: 'Share Image',
-                text: 'Check out this generated image! http://www.google.com Check out this generated image!Check out this generated image!Check out this generated image!Check out this generated image!Check out this generated image!Check out this generated image!',
-                url: 'Check out this generated image!  http://www.google.com',
+                text: 'Check out this generated image! http://www.google.com',
+                url: 'http://www.google.com',
+                files: [file],
             });
           } else {
              // Web Share API not supported, provide fallback
