@@ -344,7 +344,7 @@ shButton.addEventListener('click', async () => {
                 files: [file],
                 title: 'Share Image',
                 text: 'Check out this generated image! Check out this generated image!Check out this generated image!Check out this generated image!Check out this generated image!Check out this generated image!Check out this generated image!Check out this generated image!',
-                url: 'http://www.google.com',
+                url: 'Check out this generated image!  http://www.google.com',
             });
           } else {
              // Web Share API not supported, provide fallback
