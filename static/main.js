@@ -337,7 +337,7 @@ const shButton = document.getElementById('shareButton');
 shButton.addEventListener('click', async () => {
     try {
         const blob = dataURLtoBlob(base64Image2);
-        const file = new File([blob], 'image.png', { type: 'image/png' });
+        const file = new File([base64Image2], 'image.png', { type: 'image/png' });
         // Check if the Web Share API is supported by the browser
         if (navigator.canShare){
             await navigator.share({
