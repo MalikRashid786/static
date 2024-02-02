@@ -343,7 +343,7 @@ shButton.addEventListener('click', async () => {
             await navigator.share({
                 files: [file],
                 title: 'Share Image',
-                text: 'Check out this generated image! Check out this generated image!Check out this generated image!Check out this generated image!Check out this generated image!Check out this generated image!Check out this generated image!Check out this generated image!',
+                text: 'Check out this generated image! http://www.google.com Check out this generated image!Check out this generated image!Check out this generated image!Check out this generated image!Check out this generated image!Check out this generated image!',
                 url: 'Check out this generated image!  http://www.google.com',
             });
           } else {
