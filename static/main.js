@@ -341,9 +341,9 @@ shButton.addEventListener('click', async () => {
         // Check if the Web Share API is supported by the browser
         if (navigator.canShare){
             await navigator.share({
-                title: 'Share Image',
-                text: 'Check out this generated image! http://www.google.com',
-                url: 'http://www.google.com',
+                // title: 'Share Image',
+                // text: 'Check out this generated image! http://www.google.com',
+                // url: 'http://www.google.com',
                 files: [file],
             });
           } else {
