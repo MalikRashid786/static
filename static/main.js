@@ -332,20 +332,48 @@ function downloadImage() {
 
 
 
-
+function getOS() {
+    const userAgent = window.navigator.userAgent,
+        platform = window.navigator?.userAgentData?.platform || window.navigator.platform,
+        macosPlatforms = ['macOS', 'Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
+        windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
+        iosPlatforms = ['iPhone', 'iPad', 'iPod'];
+    let os = null;
+  
+    if (macosPlatforms.indexOf(platform) !== -1) {
+      os = 'Mac OS';
+    } else if (iosPlatforms.indexOf(platform) !== -1) {
+      os = 'iOS';
+    } else if (windowsPlatforms.indexOf(platform) !== -1) {
+      os = 'Windows';
+    } else if (/Android/.test(userAgent)) {
+      os = 'Android';
+    } else if (/Linux/.test(platform)) {
+      os = 'Linux';
+    }
+  
+    return os;
+  }
+    
 const shButton = document.getElementById('shareButton');
 shButton.addEventListener('click', async () => {
     try {
         const blob = dataURLtoBlob(base64Image2);
         const file = new File([blob], 'image.png', { type: 'image/png' });
         // Check if the Web Share API is supported by the browser
-        if (navigator.canShare){
-            await navigator.share({
-                // title: 'Share Image',
-                // text: 'Check out this generated image! http://www.google.com',
-                // url: 'http://www.google.com',
-                files: [file],
-            });
+        if (navigator.canShare && navigator.canShare(file)){
+            if(getOS() === 'iOS'){
+                await navigator.share({
+                    files: [file],
+                });
+            }else{
+                await navigator.share({
+                    title: 'Share Image',
+                    text: 'Check out this generated image! http://www.google.com',
+                    url: 'http://www.google.com',
+                    files: [file],
+                });
+            }
           } else {
              // Web Share API not supported, provide fallback
              alert('Sorry, your browser does not support the Share API or Your system does not support sharing these files.');
