@@ -358,19 +358,21 @@ function getOS() {
 const shButton = document.getElementById('shareButton');
 shButton.addEventListener('click', async () => {
     try {
-        const blob = dataURLtoBlob(base64Image2);
+        const blob = await fetch(base64Image2).then(response => response.blob());
         const file = new File([blob], 'image.png', { type: 'image/png' });
         // Check if the Web Share API is supported by the browser
         if (navigator.canShare && navigator.canShare(file)){
             if(getOS() === 'iOS'){
                 await navigator.share({
                     files: [file],
+                    text: 'Check out this generated image!',
+                    url: 'https://herbex.co.za/',
                 });
             }else{
                 await navigator.share({
                     title: 'Share Image',
-                    text: 'Check out this generated image! http://www.google.com',
-                    url: 'http://www.google.com',
+                    text: 'Check out this generated image!',
+                    url: 'https://herbex.co.za/',
                     files: [file],
                 });
             }
@@ -383,19 +385,19 @@ shButton.addEventListener('click', async () => {
     }
 });
 
-function dataURLtoBlob(dataURL) {
-    const parts = dataURL.split(';base64,');
-    const contentType = parts[0].split(':')[1];
-    const raw = window.atob(parts[1]);
-    const rawLength = raw.length;
-    const uInt8Array = new Uint8Array(rawLength);
+// function dataURLtoBlob(dataURL) {
+//     const parts = dataURL.split(';base64,');
+//     const contentType = parts[0].split(':')[1];
+//     const raw = window.atob(parts[1]);
+//     const rawLength = raw.length;
+//     const uInt8Array = new Uint8Array(rawLength);
 
-    for (let i = 0; i < rawLength; ++i) {
-        uInt8Array[i] = raw.charCodeAt(i);
-    }
+//     for (let i = 0; i < rawLength; ++i) {
+//         uInt8Array[i] = raw.charCodeAt(i);
+//     }
 
-    return new Blob([uInt8Array], { type: contentType });
-}
+//     return new Blob([uInt8Array], { type: contentType });
+// }
 
 // Share images
 // const shareButton = document.getElementById('shareButton');
