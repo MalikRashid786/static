@@ -370,7 +370,7 @@ shButton.addEventListener('click', async () => {
                 });
             } else {
                 await navigator.share({
-                    files: [file],
+                    // files: [file],
                     text: "Well, aren't you a hottie! Share your results, with this link www.herbex.co.za, tag and follow us on Instagram @herbexhealth. A few lucky participants stand a chance to win a Herbex Hamper packed full of Herbex products to support your weight loss mission. Plus personalised advice and guidance from our dedicated Customer Relations Team ,,, https://herbex.co.za/",
                     url: 'https://herbex.co.za/',
                 });
