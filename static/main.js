@@ -75,7 +75,7 @@ city.addEventListener("keyup", function (e) {
 });
 
 email.addEventListener("keyup", function (e) {
-    if (mailformat.test(email.value) &&  email.value.length != 0) {
+    if (mailformat.test(email.value) && email.value.length != 0) {
         email.style.border = "3px solid #14A44D";
     } else {
         email.style.border = "3px solid #DC4C64";
@@ -105,7 +105,7 @@ function validate() {
 
     if (files.length === 0) {
         alert("Please choose a file first...");
-        status= false;
+        status = false;
     }
 
     if (select_scene.value === '') {
@@ -116,23 +116,23 @@ function validate() {
     if (!pattern.test(user_name.value) || user_name.value.trim() === "" || !/\S/.test(user_name.value)) {
         user_name.style.border = "3px solid #DC4C64";
         status = false;
-    } 
+    }
     if (!pattern.test(surname.value) || surname.value.trim() === "" || !/\S/.test(surname.value)) {
         surname.style.border = "3px solid #DC4C64";
         status = false;
-    } 
+    }
     if (age.value <= 0 || age.value >= 100) {
         age.style.border = "3px solid #DC4C64";
         status = false;
-    } 
+    }
     if (city.value.trim() === "" || !/\S/.test(city.value)) {
         city.style.border = "3px solid #DC4C64";
         status = false;
     }
-    if (!mailformat.test(email.value) ) {
+    if (!mailformat.test(email.value)) {
         email.style.border = "3px solid #DC4C64";
         status = false;
-    } 
+    }
     if (!document.getElementById("validationFormCheck1").checked) {
         document.getElementById("checkbox_label").style.color = "#DC4C64";
         status = false;
@@ -160,10 +160,10 @@ ok_button.addEventListener("click", function () {
 });
 
 function myTimeoutFunction() {
-     // for checkings
-     loading.style.display = "none";
-     generats.style.display = "block";
-  }
+    // for checkings
+    loading.style.display = "none";
+    generats.style.display = "block";
+}
 loginPopup.classList.add("show");
 loading.style.display = "none";
 generats.style.display = "block";
@@ -182,11 +182,11 @@ function generateImage() {
     display_error.style.display = "none";
 
     setTimeout(() => myTimeoutFunction("Hello", "World"), 5000);
-    
+
     // Create a FormData object to send the image to the server
     var formData = new FormData();
     formData.append("image", inputImage);
-    
+
     formData.append("name", user_name.value);
     formData.append("surname", surname.value);
     formData.append("age", age.value);
@@ -206,28 +206,28 @@ function generateImage() {
         .then(data => {
             // Remove loading indicator
             loading.style.display = "none";
-    
+
             // Display the generated images
             var generatedImagesElement_1 = document.getElementById("generate_img_1");
             generatedImagesElement_1.innerHTML = "";
-    
+
             // var generatedImagesElement_2 = document.getElementById("generate_img_2");
             // generatedImagesElement_2.innerHTML = "";
-    
+
             if (data && data.success && data.data !== null) {
                 generats.style.display = "block";
-    
+
                 // Create image elements
                 var imageElement_1 = createImageElement("data:image/png;base64," + data.data[0]);
                 // var imageElement_2 = createImageElement("data:image/png;base64," + data.data[1]);
-    
+
                 // Store image URLs
                 window.img1 = imageElement_1.src;
                 // window.img2 = imageElement_2.src;
-    
+
                 window.img1_url = data.data[1];
                 // window.img2_url = data.data[3];
-    
+
                 // Append image elements to the DOM
                 generatedImagesElement_1.appendChild(imageElement_1);
                 // generatedImagesElement_2.appendChild(imageElement_2);
@@ -239,13 +239,13 @@ function generateImage() {
                 console.error(errorMessage);
             }
         })
-        .catch((error) =>{
+        .catch((error) => {
             // disappeared loading indicator
             // loading.style.display = "none";
             // display_error.style.display = "block";
             console.error("Error:", error);
         });
-    
+
     // Reset form data
     resetForm();
 }
@@ -309,7 +309,7 @@ function createImageElement(src) {
 
 function downloadImage() {
     // Base64-encoded image string
-    var base64Image = base64Image2; 
+    var base64Image = base64Image2;
 
     // Create a link element
     var downloadLink = document.createElement("a");
@@ -339,50 +339,49 @@ function getOS() {
         windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
         iosPlatforms = ['iPhone', 'iPad', 'iPod'];
     let os = null;
-  
+
     if (macosPlatforms.indexOf(platform) !== -1) {
-      os = 'Mac OS';
+        os = 'Mac OS';
     } else if (iosPlatforms.indexOf(platform) !== -1) {
-      os = 'iOS';
+        os = 'iOS';
     } else if (windowsPlatforms.indexOf(platform) !== -1) {
-      os = 'Windows';
+        os = 'Windows';
     } else if (/Android/.test(userAgent)) {
-      os = 'Android';
+        os = 'Android';
     } else if (/Linux/.test(platform)) {
-      os = 'Linux';
+        os = 'Linux';
     }
-  
+
     return os;
-  }
-    
+}
+
 const shButton = document.getElementById('shareButton');
 shButton.addEventListener('click', async () => {
     try {
         const blob = await fetch(base64Image2).then(response => response.blob());
         const file = new File([blob], 'image.png', { type: 'image/png' });
         // Check if the Web Share API is supported by the browser
-        if (navigator.canShare && navigator.canShare(file)){
-            if(getOS() === 'iOS'){
+        if (navigator.canShare && navigator.canShare(file)) {
+            if (getOS() === 'iOS') {
                 await navigator.share({
                     files: [file],
                     text: "Well, aren't you a hottie! Share your results, with this link www.herbex.co.za, tag and follow us on Instagram @herbexhealth. A few lucky participants stand a chance to win a Herbex Hamper packed full of Herbex products to support your weight loss mission. Plus personalised advice and guidance from our dedicated Customer Relations Team ,,, https://herbex.co.za/",
                     url: 'https://herbex.co.za/',
                 });
-            }else{
+            } else {
                 await navigator.share({
-                    title: 'Share Image',
-                    text: 'Check out this generated image! https://herbex.co.za/',
+                    files: [file],
+                    text: "Well, aren't you a hottie! Share your results, with this link www.herbex.co.za, tag and follow us on Instagram @herbexhealth. A few lucky participants stand a chance to win a Herbex Hamper packed full of Herbex products to support your weight loss mission. Plus personalised advice and guidance from our dedicated Customer Relations Team ,,, https://herbex.co.za/",
                     url: 'https://herbex.co.za/',
-                    // files: [file],
                 });
             }
           } else {
-             // Web Share API not supported, provide fallback
-             alert('Sorry, your browser does not support the Share API or Your system does not support sharing these files.');
-          }
+    // Web Share API not supported, provide fallback
+    alert('Sorry, your browser does not support the Share API or Your system does not support sharing these files.');
+}
     } catch (error) {
-        console.error('Error sharing image:', error);
-    }
+    console.error('Error sharing image:', error);
+}
 });
 
 // function dataURLtoBlob(dataURL) {
@@ -401,25 +400,25 @@ shButton.addEventListener('click', async () => {
 
 // Share images
 // const shareButton = document.getElementById('shareButton');
-    // Add click event listener to the share button
-    // shareButton.addEventListener('click', async () => {
-    //     try {
-            // Check if the navigator supports the Share API
-            // if (navigator.share) {
-                // Use the Share API to trigger the native sharing dialog
-            //     await navigator.share({
-            //         title: 'Share Image',
-            //         text: 'Check out this generated image!',
-            //         url: img1_url
-            //     });
-            // } else {
-                // Fallback for browsers that do not support the Share API
-    //             alert('Sorry, your browser does not support the Share API.');
-    //         }
-    //     } catch (error) {
-    //         console.error('Error sharing image:', error);
-    //     }
-    // });
+// Add click event listener to the share button
+// shareButton.addEventListener('click', async () => {
+//     try {
+// Check if the navigator supports the Share API
+// if (navigator.share) {
+// Use the Share API to trigger the native sharing dialog
+//     await navigator.share({
+//         title: 'Share Image',
+//         text: 'Check out this generated image!',
+//         url: img1_url
+//     });
+// } else {
+// Fallback for browsers that do not support the Share API
+//             alert('Sorry, your browser does not support the Share API.');
+//         }
+//     } catch (error) {
+//         console.error('Error sharing image:', error);
+//     }
+// });
 
 // Share Popup 
 // const section = document.querySelector(".share_popup"),
